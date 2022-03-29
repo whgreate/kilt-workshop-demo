@@ -84,22 +84,23 @@ export async function attestingFlow(): Promise<Kilt.ICredential> {
     fullDid.did
   );
 
-  // 1. encrypt:
+  // 1. claimer加密message
   const encryptedRequestForAttestationMessage =
     await requestForAttestationMessage.encrypt(
       lightDid.encryptionKey!.id,
       lightDid,
-      keystore1,
-      fullDid.assembleKeyId(fullDid.encryptionKey!.id)
+      keystore1, // 注意使用keystore1
+      fullDid.assembleKeyId(fullDid.encryptionKey!.id) // 可以理解成attest的公钥
     );
 
   const mnemonic2 = process.env.ATTESTER_MNEMONIC as string;
   const keystore2 = new Kilt.Did.DemoKeystore();
   await generateKeypairs(keystore2, mnemonic2);
 
+  // attester解密
   const decryptedRequestForAttestationMessage = await Kilt.Message.decrypt(
     encryptedRequestForAttestationMessage,
-    keystore2,
+    keystore2, // 注意使用keystore2
     fullDid
   );
   let extractedRequestForAttestation: Kilt.IRequestForAttestation;
