@@ -40,7 +40,7 @@ owner 就是 attester 的账号，claimHash 就是 rootHash，所以就可以理
 区块链查询
 https://kilt-testnet.subscan.io/account/4o1agqEshKHmycwZZ6pnpffbGRx9dBuX6hwMhC66xgXZkXw3
 
-### 大锤的目标
+### 目标
 
 创建 claimRequest 的时候不传 request
 claim.utils.js 157~159 行 注释，然后
